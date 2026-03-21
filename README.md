@@ -8,4 +8,5 @@ Samling av automatiseringsscripts for praktiske oppgaver.
 |-------|-------------|
 | `angermann/` | Last ned lærebøker fra angerman.no som PDF |
 | `lomholan-fagbokforlaget/` | Last ned ressursfiler fra lomholan.fagbokforlaget.no |
+| `youtube-downloader/` | Last ned YouTube-videoer som MP4 |
 

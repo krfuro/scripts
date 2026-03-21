@@ -54,3 +54,13 @@ Du finner alle nedlastede filer i mappen `lomholan_filer/`. Typisk innhold:
 - **Fag:** Organisasjon og ledelse, Økonomistyring, Markedsføringsledelse
 - **Namespace:** `65758e40-59ac-4e2b-8b7b-3d44e37b5114`
 - **Ingen innlogging nødvendig** – filene er åpent tilgjengelige
+
+---
+
+## ⚖️ Juridisk disclaimer
+
+Innholdet på lomholan.fagbokforlaget.no er åpent tilgjengelig, men er beskyttet av opphavsrett.
+
+- ✅ Nedlasting til privat bruk er tillatt
+- ❌ Ikke distribuer eller del filene videre
+- ❌ Ikke bruk innholdet kommersielt

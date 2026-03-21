@@ -12,7 +12,7 @@ python3 -m playwright install chromium
 Åpne boken i Chrome mens du er logget inn på angerman.no:
 👉 https://angerman.no/wp-content/uploads/blafiler/full/maskiner-maskinkjoring-utg-11/
 
-Åpne DevTools → Console (F12) og lim inn og kjør dette i bolker:
+Kjør nedlastingsscriptet fra arbeidsmappen din:
 ```javascript
 async function lastNedBolk(fra, til) {
     const BASE = "https://angerman.no/wp-content/uploads/blafiler/full/maskiner-maskinkjoring-utg-11/files/assets/common/";

@@ -9,46 +9,35 @@ python3 -m playwright install chromium
 ```
 
 ## Steg 1 – Last ned boksidene
-Åpne boken i Chrome mens du er logget inn på angerman.no:
-👉 https://angerman.no/wp-content/uploads/blafiler/full/sikkerhet-ansvar-kontroll-utgave-19/
 
-Kjør nedlastingsscriptet fra arbeidsmappen din:
-```javascript
-async function lastNedBolk(fra, til) {
-    const BASE = "https://angerman.no/wp-content/uploads/blafiler/full/sikkerhet-ansvar-kontroll-utgave-19/files/assets/common/";
-    const UNI = "?uni=c8fa0e9d753f575f88b7fec412b95894";
-    for (let i = fra; i <= til; i++) {
-        const num = String(i).padStart(4, '0');
-        for (const [url, navn] of [
-            [`${BASE}page-vectorlayers/${num}.svg${UNI}`, `side${num}.svg`],
-            [`${BASE}page-html5-substrates/page${num}_1.jpg${UNI}`, `page${num}_1.jpg`]
-        ]) {
-            const r = await fetch(url);
-            if (r.ok) {
-                const a = document.createElement('a');
-                a.href = URL.createObjectURL(await r.blob());
-                a.download = navn; a.click();
-                URL.revokeObjectURL(a.href);
-            }
-            await new Promise(res => setTimeout(res, 150));
-        }
-    }
-    return 'Ferdig!';
-}
-await lastNedBolk(1, 80);
-await lastNedBolk(81, 112);
+Kjør `last_ned_sider.py` fra arbeidsmappen din:
+```bash
+python3 last_ned_sider.py
 ```
 
-## Steg 2 – Flytt filer og lag PDF
+Følgende vil skje:
+- En Chrome-nettleser åpnes automatisk
+- Boken lastes inn (du må være logget inn på angerman.no fra før)
+- Scriptet laster ned alle 112 sider som to filer per side:
+  - `side0001.svg` – tekstlaget (søkbar tekst, vektorgrafik)
+  - `page0001_1.jpg` – bakgrunnsbilde (bilder og illustrasjoner)
+- Filene lagres direkte i arbeidsmappen
+- Nettleseren lukkes automatisk når alt er ferdig
+
+## Steg 2 – Lag PDF
+
+Kjør `lag_pdf.py` fra samme mappe:
 ```bash
-mkdir ~/bok1 && mv ~/Downloads/side*.svg ~/Downloads/page*_1.jpg ~/bok1/
-cd ~/bok1
-cp /sti/til/lag_pdf.py .
 python3 lag_pdf.py
 ```
 
-Ferdig! Du finner `sikkerhet-ansvar-kontroll.pdf` i mappen.
+Følgende vil skje:
+- Scriptet finner automatisk alle nedlastede sider i mappen
+- Hver side bygges opp ved å legge SVG-tekstlaget oppå JPG-bakgrunnen
+- Sidene slås sammen til én PDF-fil
+- Du får `sikkerhet-ansvar-kontroll.pdf` i mappen når det er ferdig
 
 ## Info
 - 112 sider totalt
 - uni-nøkkel: `c8fa0e9d753f575f88b7fec412b95894`
+- URL: https://angerman.no/wp-content/uploads/blafiler/full/sikkerhet-ansvar-kontroll-utgave-19/

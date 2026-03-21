@@ -1,43 +1,88 @@
 # Maskiner og maskinkjøring – utg. 11
 
-Laster ned og lager PDF av læreboken fra angerman.no.
+Denne guiden forklarer steg for steg hvordan du laster ned læreboken fra angerman.no og lager en lokal PDF-fil du kan bruke offline.
 
-## Krav
+---
+
+## Før du starter – installer nødvendige programmer
+
+Åpne terminalen og kjør disse kommandoene én etter én:
 ```bash
 pip3 install playwright pypdf
 python3 -m playwright install chromium
 ```
 
-## Steg 1 – Last ned boksidene
+Dette installerer:
+- `playwright` – lar Python styre en nettleser automatisk
+- `pypdf` – lar Python sette sammen PDF-filer
+- `chromium` – nettleseren som brukes av scriptene
 
-Kjør `last_ned_sider.py` fra arbeidsmappen din:
+---
+
+## Steg 1 – Logg inn på angerman.no
+
+1. Åpne Chrome
+2. Gå til https://angerman.no
+3. Logg inn med din konto (e-post og passord)
+4. Bekreft at du er logget inn før du går videre
+
+---
+
+## Steg 2 – Last ned boksidene
+
+Åpne terminalen, naviger til mappen der du vil lagre boken, og kjør:
 ```bash
 python3 last_ned_sider.py
 ```
 
 Følgende vil skje:
-- En Chrome-nettleser åpnes automatisk
-- Boken lastes inn (du må være logget inn på angerman.no fra før)
-- Scriptet laster ned alle 324 sider som to filer per side:
-  - `side0001.svg` – tekstlaget (søkbar tekst, vektorgrafik)
-  - `page0001_1.jpg` – bakgrunnsbilde (bilder og illustrasjoner)
-- Filene lagres direkte i arbeidsmappen
-- Nettleseren lukkes automatisk når alt er ferdig
+- Et Chrome-vindu åpnes automatisk på boksiden
+- Scriptet venter 3 sekunder på at siden laster
+- Alle 324 sider lastes ned automatisk – to filer per side:
+  - `side0001.svg` – inneholder all tekst og vektorgrafik (søkbar i PDF)
+  - `page0001_1.jpg` – inneholder bakgrunnsbilde med illustrasjoner og farger
+- Du ser `✓ Side 1/324` osv. etter hvert som sider lastes ned
+- Chrome-vinduet lukkes automatisk når alt er ferdig
+- Du vil da ha opptil 648 filer i mappen (noen sider mangler SVG – disse er blanke sider)
 
-## Steg 2 – Lag PDF
+> ⚠️ Ikke lukk Chrome-vinduet manuelt mens scriptet kjører
+> ⏱ Nedlastingen tar ca. 15–20 minutter for 324 sider
 
-Kjør `lag_pdf.py` fra samme mappe:
+---
+
+## Steg 3 – Lag PDF
+
+Kjør følgende kommando i samme mappe:
 ```bash
 python3 lag_pdf.py
 ```
 
 Følgende vil skje:
-- Scriptet finner automatisk alle nedlastede sider i mappen
-- Hver side bygges opp ved å legge SVG-tekstlaget oppå JPG-bakgrunnen
-- Sidene slås sammen til én PDF-fil
-- Du får `maskiner-maskinkjoring.pdf` i mappen når det er ferdig
+- Scriptet finner automatisk alle nedlastede SVG- og JPG-filer i mappen
+- Et usynlig Chrome-vindu åpnes for å rendre hver side korrekt
+- Hver side bygges opp slik: JPG-bakgrunn + SVG-tekst lagt oppå
+- Du ser `✓ Side 0001`, `✓ Side 0002` osv. etter hvert som sider behandles
+- Sider uten SVG (blanke sider) inkluderes automatisk med kun bakgrunn
+- Alle sider slås til slutt sammen til én fil
+- Når scriptet er ferdig finner du `maskiner-maskinkjoring.pdf` i mappen
 
-## Info
-- 324 sider totalt
-- uni-nøkkel: `2b3a0141e43b00b97dffb1bc8ece628b`
-- URL: https://angerman.no/wp-content/uploads/blafiler/full/maskiner-maskinkjoring-utg-11/
+> ⏱ Dette tar ca. 20–30 minutter for 324 sider
+
+---
+
+## Resultat
+
+Du har nå en komplett PDF med:
+- ✅ Alle 324 sider i riktig rekkefølge
+- ✅ Bilder og illustrasjoner
+- ✅ Søkbar tekst (du kan bruke Ctrl+F / Cmd+F i PDF-leseren)
+- ✅ Korrekte fonter og layout
+
+---
+
+## Bokinformasjon
+- **Tittel:** Maskiner og maskinkjøring
+- **Utgave:** 11
+- **Sider:** 324
+- **URL:** https://angerman.no/wp-content/uploads/blafiler/full/maskiner-maskinkjoring-utg-11/
+- **uni-nøkkel:** `2b3a0141e43b00b97dffb1bc8ece628b`

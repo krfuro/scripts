@@ -9,4 +9,5 @@ Samling av automatiseringsscripts for praktiske oppgaver.
 | `angermann/` | Last ned lærebøker fra angerman.no som PDF |
 | `lomholan-fagbokforlaget/` | Last ned ressursfiler fra lomholan.fagbokforlaget.no |
 | `youtube-downloader/` | Last ned YouTube-videoer som MP4 |
+| `film-pipeline/` | Ripp ISO → MKV → MP4 klar for Plex |
 

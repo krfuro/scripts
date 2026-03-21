@@ -131,3 +131,21 @@ Movies/backup/
     ├── Film1.mp4
     └── Film2.mp4
 ```
+
+---
+
+## ⚖️ Juridisk disclaimer
+
+Dette scriptet er laget for **privat sikkerhetskopiering av egeneide fysiske medier** (DVD/Blu-ray).
+
+Etter norsk **Åndsverkloven §26** er kopiering til privat bruk tillatt, forutsatt at:
+- ✅ Du eier den fysiske DVD-en du ripper
+- ✅ Kopien kun brukes privat (ikke deles, selges eller distribueres)
+- ✅ Kopien ikke gjøres tilgjengelig for andre enn nær familie/omgangskrets
+
+**Merk:** Omgåelse av kopibeskyttelse (DRM) på DVD er en juridisk grå sone i Norge. Loven tillater privatkopiering, men beskytter samtidig tekniske sperrer. Bruk scriptet på eget ansvar.
+
+Dette scriptet er **ikke** laget for eller ment til:
+- ❌ Kopiering av lånte, leide eller piratkopierte medier
+- ❌ Distribusjon eller deling av kopier
+- ❌ Kommersiell bruk

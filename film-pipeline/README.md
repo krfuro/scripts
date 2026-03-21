@@ -13,9 +13,9 @@ Samling av scripts for å rippe, rydde og klargjøre filmer fra ISO til Plex-kla
 
 ## Anbefalt rekkefølge
 ```
-1. Rip_ISO_above_1_3GB-WORKING.command   ← ripp ISO til MKV
+1. Rip_ISO_above_1_3GB-WORKING.command    ← ripp ISO til MKV
 2. Pipeline_Cleanup_Rename_Flatten.command ← rydd og klargjør
-3. HandBrake_Batch_MKV_to_MP4.command   ← konverter til MP4
+3. HandBrake (manuelt via GUI inntil videre)
 4. Plex skanner inn filene automatisk
 ```
 
@@ -84,14 +84,9 @@ Følgende vil skje:
 
 ---
 
-### 6. HandBrake_Batch_MKV_to_MP4.command
-Konverterer alle MKV-filer til MP4 via HandBrakeCLI.
+### 6. HandBrake_Batch_MKV_to_MP4.command ⚠️ BETA – ikke ferdigstilt
 
-Følgende vil skje:
-- Finner alle `.mkv`-filer i mappen
-- Konverterer hver fil til MP4 med presettet `MakeMKV_to_Plex_AllTracks`
-- Lagrer MP4-filene i en `MP4/`-undermappe
-- Viser fremdrift for hver fil
+Dette scriptet er under utvikling og skal på sikt batch-konvertere MKV til MP4 via HandBrakeCLI. **Ikke bruk dette i produksjon ennå.**
 
 ---
 

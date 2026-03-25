@@ -12,3 +12,4 @@ Samling av automatiseringsscripts for praktiske oppgaver.
 | `film-pipeline/` | Ripp ISO → MKV → MP4 klar for Plex |
 
 | `norskindustri-gkl/` | Last ned e-læringskurs fra Norsk Industri GKL som PDF |
+| `youtube-downloader/` | Last ned YouTube-videoer som MP4 |

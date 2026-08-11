@@ -10,6 +10,7 @@ Samling av automatiseringsscripts for praktiske oppgaver.
 | `film-pipeline/` | Ripp ISO → MKV → MP4 klar for Plex |
 | `lekogskole/` | Last ned alle gratis oppgavehefter (PDF) fra lekogskole.no, sortert på fag og klassetrinn |
 | `lomholan-fagbokforlaget/` | Last ned ressursfiler fra lomholan.fagbokforlaget.no |
+| `malimo/` | Last ned gratisressursene fra malimo.no, sortert på fag og tema |
 | `norskindustri-gkl/` | Last ned e-læringskurs fra Norsk Industri GKL som PDF |
 | `youtube-downloader/` | Last ned YouTube-videoer som MP4 |
 

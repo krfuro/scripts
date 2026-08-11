@@ -18,7 +18,11 @@ PROFIL = "/tmp/malimo-profil"
 CACHE = "/tmp/malimo_produkter.json"
 BASE = "https://malimo.no"
 ROT = sys.argv[1] if len(sys.argv) > 1 else "Malimo"
-GRENSE = int(sys.argv[2]) if len(sys.argv) > 2 else 0     # 0 = alle
+# Argument 2: enten et tall (test på N produkter) eller en fil med URL-er
+# (én per linje) – nyttig for å kjøre om igjen bare det som feilet.
+ARG2 = sys.argv[2] if len(sys.argv) > 2 else ""
+LISTEFIL = ARG2 if ARG2 and os.path.exists(ARG2) else ""
+GRENSE = int(ARG2) if ARG2.isdigit() else 0     # 0 = alle
 SPRAK_OK = ["bokmål", "bokmal"]
 
 KART = [
@@ -43,25 +47,30 @@ KART = [
     (r"barnehage", "Barnehage"),
     (r"plakat|dekor|banner|skilt|navnelapp|merkelapp|kalender", "Plakater og dekor"),
     (r"spill|bingo|domino|\blek\b|aktivitet", "Læringsspill"),
-    (r"fargelegg|farger", "Fargelegging"),
+    (r"fargelegg|farger|mandala", "Fargelegging"),
+    (r"mini-crafts|crafts|forming|klipp og lim", "Forming"),
+    (r"mat og helse", "Mat og helse"),
+    (r"redigerbar|skjema|timeplan|soveliste|ordenselev|velkomstbrev|"
+     r"doskjema|liste\b", "Skjemaer og maler"),
 ]
 
 VELG_JS = """(sprakOk) => {
-  const bs = [...document.querySelectorAll('[role=dialog] button')];
+  // Hver fil har en avkrysningsboks (button[aria-checked]) med radtekst
+  // "filnavn | størrelse | språk". Første boks er "Velg alle" – den hoppes over.
+  // Filnavnet har ikke alltid filendelse, så vi kan ikke filtrere på det.
+  const bokser = [...document.querySelectorAll('[role=dialog] button[aria-checked]')];
   let valgt = 0, sett = 0;
-  bs.forEach((b, i) => {
-    const t = (b.innerText || '').trim();
-    if (!/\\.(pdf|docx?|pptx?|zip|png|jpe?g)/i.test(t)) return;
+  bokser.forEach(cb => {
+    const rad = cb.closest('li')
+             || cb.parentElement?.parentElement?.parentElement
+             || cb.parentElement;
+    const radTekst = (rad ? rad.innerText : '').toLowerCase();
+    if (/velg alle|last ned valgte/.test(radTekst)) return;   // kontrollrad
+    if (!radTekst.trim()) return;
     sett++;
-    const rad = b.closest('li') || b.parentElement?.parentElement || b.parentElement;
-    const radTekst = (rad ? rad.innerText : t).toLowerCase();
-    let cb = null;
-    for (let j = i - 1; j >= 0 && j >= i - 4; j--) {
-      if (bs[j].hasAttribute('aria-checked')) { cb = bs[j]; break; }
-    }
     const hopp = ['nynorsk','engelsk','samisk','tegnspråk']
         .some(s => radTekst.includes(s)) && !sprakOk.some(s => radTekst.includes(s));
-    if (cb && !hopp) { cb.click(); valgt++; }
+    if (!hopp) { cb.click(); valgt++; }
   });
   return {sett, valgt};
 }"""
@@ -210,7 +219,10 @@ async def main():
             accept_downloads=True)
         pg = ctx.pages[0] if ctx.pages else await ctx.new_page()
 
-        if os.path.exists(CACHE):
+        if LISTEFIL:
+            prod = [l.strip() for l in open(LISTEFIL) if l.strip()]
+            print(f"Kjører på {len(prod)} URL-er fra {LISTEFIL}\n")
+        elif os.path.exists(CACHE):
             prod = json.load(open(CACHE))
             print(f"Bruker mellomlagret produktliste ({len(prod)} stk).")
             print(f"Slett {CACHE} for å kartlegge butikken på nytt.\n")

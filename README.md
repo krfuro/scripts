@@ -7,9 +7,11 @@ Samling av automatiseringsscripts for praktiske oppgaver.
 | Mappe | Beskrivelse |
 |-------|-------------|
 | `angermann/` | Last ned lærebøker fra angerman.no som PDF |
-| `lomholan-fagbokforlaget/` | Last ned ressursfiler fra lomholan.fagbokforlaget.no |
-| `youtube-downloader/` | Last ned YouTube-videoer som MP4 |
 | `film-pipeline/` | Ripp ISO → MKV → MP4 klar for Plex |
-
+| `lekogskole/` | Last ned alle gratis oppgavehefter (PDF) fra lekogskole.no |
+| `lomholan-fagbokforlaget/` | Last ned ressursfiler fra lomholan.fagbokforlaget.no |
 | `norskindustri-gkl/` | Last ned e-læringskurs fra Norsk Industri GKL som PDF |
 | `youtube-downloader/` | Last ned YouTube-videoer som MP4 |
+
+Hver mappe har sin egen `README.md` med framgangsmåte, forutsetninger og
+juridisk disclaimer.
